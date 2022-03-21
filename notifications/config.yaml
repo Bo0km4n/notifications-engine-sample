@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: foo-notifications-cm
+  namespace: default
+data:
+  trigger.on-foo-ready: |
+    - when: foo.status.ready
+      send: [foo-ready]
+
+  template.foo-ready: |
+    message: |
+      Foo {{.foo.metadata.name}} is ready!
+    slack:
+      attachments: |
+        [{
+          "title": "{{.foo.metadata.name}}",
+          "color": "#18be52",
+          "fields": [{
+            "title": "Sync Status",
+            "value": "Green",
+            "short": true
+          }, {
+            "title": "Second field",
+            "value": "test",
+            "short": true
+          }]
+        }]
+
+  service.slack: |
+    token: $slack-token

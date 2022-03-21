@@ -1,0 +1,16 @@
+domain: example.org
+layout:
+- go.kubebuilder.io/v3
+projectName: notifications-engine-sample
+repo: github.com/Bo0km4n/notifications-engine-sample
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: example.org
+  group: dummy
+  kind: Foo
+  path: github.com/Bo0km4n/notifications-engine-sample/api/v1
+  version: v1
+version: "3"
